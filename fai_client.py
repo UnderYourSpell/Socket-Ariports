@@ -1,7 +1,7 @@
 from classes.client import Client
 from libs.airport_codes import AirportCodes
 
-otz_client = Client(tier = 4, name = 'OTZ')
+otz_client = Client(tier = 4, name = 'FAI')
 
 airports = AirportCodes()
 host,port = airports.get_address('ANC') #connecting to Anchorage

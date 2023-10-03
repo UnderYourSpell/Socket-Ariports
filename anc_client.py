@@ -1,4 +1,4 @@
-from clients.client_class import Client
+from classes.client import Client
 from libs.airport_codes import AirportCodes
 
 anc_client = Client(tier = 1)
