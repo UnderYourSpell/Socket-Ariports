@@ -1,13 +1,3 @@
-#!/usr/bin/env python
-# -*- coding: utf8 -*-
-#
-# [SNIPPET_NAME: Threaded Server]
-# [SNIPPET_CATEGORIES: Python Core, socket, threading]
-# [SNIPPET_DESCRIPTION: Simple example of Python's socket and threading modules]
-# [SNIPPET_DOCS: http://docs.python.org/library/socket.html, http://docs.python.org/library/threading.html]
-# [SNIPPET_AUTHOR: Gonzalo Núñez <gnunezr@gmail.com>]
-# [SNIPPET_LICENSE: GPL]
-
 import sys
 import socket
 import threading
@@ -16,75 +6,38 @@ import time
 QUIT = False
 
 class ClientThread( threading.Thread ):
-    ''' 
-    Class that implements the client threads in this server
-    '''
 
-    def __init__( self, client_sock ):
-        '''
-        Initialize the object, save the socket that this thread will use.
-        '''
-
-        threading.Thread.__init__( self )
-        self.sock = socket.socket(socket.AF_INET,socket.SOCK_STREAM)
-        self.client = client_sock
-        self.name  = 'ANC'
+    def __init__(self,sock=None,tier = int, name = str):
+        if sock is None:
+            self.sock = socket.socket(socket.AF_INET,socket.SOCK_STREAM)
+            self.tier = tier
+            self.name = name
     
-    def getName(self) -> str:
-        return self.name
+    def connect(self,host,port):
+        server_address = (host, port)
+        self.sock.connect(server_address)
+    
+    def run(self):
+        try:
+            while True:
+                message = input("Enter a message to send to the server (or '.' to quit): ")
+                
+                if message == '.':
+                    break  # Exit and close the connection
+                
+                # Encode and send the message to the server
+                self.sock.sendall(message.encode())
 
-    def run( self ):
-        ''' 
-        Thread's main loop. Once this function returns, the thread is finished 
-        and dies. 
-        '''
-        #
-        # Need to declare QUIT as global, since the method can change it
-        #
-        global QUIT
-        done = False
-        cmd = self.readline()
-        #
-        # Read data from the socket and process it
-        #
-        while not done:
-            if 'quit' == cmd :
-                self.writeline( 'Ok, bye' )
-                QUIT = True
-                done = True
-            elif 'bye' == cmd:
-                self.writeline( 'Ok, bye' )
-                done = True
-            else:
-                self.writeline( self.name )
+                # Receive the response from the server
+                data = self.sock.recv(1024)
+                print("Received from server: {}".format(data.decode()))
 
-            cmd = self.readline()
+        except Exception as e:
+            print("Error: {}".format(e))
 
-        #
-        # Make sure the socket is closed once we're done with it
-        #
-        self.client.close()
-        return
-       
-
-    def readline( self ):
-        ''' 
-        Helper function, reads up to 1024 chars from the socket, and returns 
-        them as a string, all letters in lowercase, and without any end of line 
-        markers '''
-
-        result = self.client.recv( 1024 )
-        if( None != result ):
-            result = result.strip().lower()
-        return result
-
-    def writeline( self, text ):
-        ''' 
-        Helper function, writes teh given string to the socket, with an end of 
-        line marker appended at the end 
-        '''
-
-        self.client.sendall((text.strip() + '\n').encode())
+        finally:
+            # Clean up the connection
+            self.sock.close()
 
 class Server:
     ''' 
@@ -93,9 +46,18 @@ class Server:
     object and defers the processing of the connection to it. 
     '''
 
-    def __init__( self ):
-        self.sock = None
-        self.thread_list = []
+    def __init__(self,sock=None,tier = int,name  = str):
+        if sock is None:
+            self.sock = socket.socket(socket.AF_INET,socket.SOCK_STREAM)
+            self.server_address = ('',0000)
+            self.tier = tier
+            self.name  = name
+            self.arrived = []
+            self.thread_list = []
+
+    def bind(self,host,port):
+        self.server_address = (host,port)
+        self.sock.bind(self.server_address)          
 
     def run( self ):
         '''
@@ -125,7 +87,7 @@ class Server:
                 #
                 # Bind it to the interface and port we want to listen on
                 #
-                self.sock.bind( ( '127.0.0.1', 5050 ) )
+                self.bind(self.server_address)
                 #
                 # Listen for incoming connections. This server can handle up to
                 # 5 simultaneous connections
@@ -184,15 +146,52 @@ class Server:
                 self.thread_list.append( new_thread )
                 new_thread.start()
 
-                #
-                # Go over the list of threads, remove those that have finished
-                # (their run method has finished running) and wait for them 
-                # to fully finish
-                #
-                for thread in self.thread_list:
-                    if not thread.is_alive():
-                        self.thread_list.remove( thread )
-                        thread.join()
+                print("Server is listening on {}.{}".format(*self.server_address))
+
+                print("TCP server is waiting for incoming connections")
+
+                while True:
+                    #Wait for connection from client
+                    print("Waiting for a connection...")
+                    client_socket, client_address = self.sock.accept()
+                    print("Accepted connection from {}:{}".format(*client_address))
+
+                    try:
+                        while True:
+                            # Receive data from the client
+                            data = client_socket.recv(1024)
+                            if not data:
+                                break  # No more data, break the loop
+                
+                            # Decode the received data, format with the variables involved, and display the string.
+                            print(f"Received data from {client_address}: {data.decode()}")
+
+                            if data.decode() == self.name:
+                                print('You have arrived')
+                                self.arrived.append(data.decode())
+                            else:
+                                print('Forwarding to destination')
+                    
+                            # Create an acknowledgment.
+                            ack = "Hey, this is the server acknowledging the receipt of your data: " + data.decode()
+
+                            # Encode the acknowledgment and send to client.
+                            client_socket.sendall(ack.encode())
+                    except Exception as e:
+                        print("Error: {}".format(e))
+                    finally:
+                        # Clean up the connection
+                        client_socket.close()
+                        print("Connection closed by {}:{}".format(*client_address))
+                        #
+                        # Go over the list of threads, remove those that have finished
+                        # (their run method has finished running) and wait for them 
+                        # to fully finish
+                        #
+                        for thread in self.thread_list:
+                            if not thread.is_alive():
+                                self.thread_list.remove( thread )
+                                thread.join()
 
         except KeyboardInterrupt:
             print ('Ctrl+C pressed... Shutting Down')
@@ -218,6 +217,3 @@ if "__main__" == __name__:
     server.run()
 
     print ("Terminated")
-
-
-
