@@ -1,4 +1,4 @@
-from classes.server import Server
+from libs.server import Server
 from libs.airport_codes import AirportCodes
 
 anc = Server(tier = 1,name  = 'ANC')

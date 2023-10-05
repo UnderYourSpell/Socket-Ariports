@@ -1,0 +1,11 @@
+1. Figure out how to send messages that indicate it was sent by a server
+2. Figure out how to send messages that indicate it was sent by a client
+3. Handle server and client messages differently
+4. Add storage arrays for incoming information
+
+note:  Servers are the only objects that can receive messages
+Clients can send messages, but cannot receive them
+therefore, we can send passenger information via the client to a server
+then the server can either store that information or send it to another server
+by opening up a quick connection (code already written for when a message is sent by a client)
+code not written for a server receiving a message from another server

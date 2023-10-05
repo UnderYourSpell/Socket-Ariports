@@ -1,2 +1,4 @@
 https://docs.python.org/3/howto/sockets.html
 https://medium.com/swlh/creating-a-simple-router-simulation-using-python-and-sockets-d6017b441c09
+https://docs.python.org/3/library/socket.html
+https://www.youtube.com/watch?v=xceTFWy_eag&t=1160s
