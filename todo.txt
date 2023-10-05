@@ -9,3 +9,8 @@ therefore, we can send passenger information via the client to a server
 then the server can either store that information or send it to another server
 by opening up a quick connection (code already written for when a message is sent by a client)
 code not written for a server receiving a message from another server
+
+
+get rid of code for tiers
+
+get rid of double adding to received payloads
