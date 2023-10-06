@@ -14,3 +14,10 @@ code not written for a server receiving a message from another server
 get rid of code for tiers
 
 get rid of double adding to received payloads
+
+for a client:
+    when we have a function that lets us enter information for a destination,
+    we will check if we are allowed to connect to that server.  If its not in the list
+    display airports we are actually allowed to connect to.
+
+    use a for loop, to allow user to send to different airport

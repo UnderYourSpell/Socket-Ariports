@@ -1,18 +1,28 @@
 from libs.client import Client
 from libs.airport_codes import AirportCodes
 
-anc_client = Client(tier = 4, name = 'ANC')
+anc_client = Client(name = 'ANC')
 
 airports = AirportCodes()
-host,port = airports.get_address('ANC') #connecting to Anchorage
 
-anc_client.connect(host,port) #since it is tier 4, we are only connecting to Anchorage
-peer_airports = ['ANC','FAI','SEA']
-for peer in peer_airports:
-    anc_client.connect(airports.get_address(peer))
+#declare airports we can directly connect to
+allowed_airports = ['FAI','SEA','BRW','OTZ']
+anc_client.init_allowed_airports(allowed_airports)
 
 
-anc_client.update_info("FAI","Moro Bamber")
 
-host,port = airports.get_address(anc_client.dest())
-anc_client.run()
+while True:
+    anc_client.input_message()
+    if anc_client.cont == '.':
+        break
+    if anc_client.dest in allowed_airports:
+        #if we have a direct connection to desired airport, connect and send message
+        host,port = host,port = airports.get_address(anc_client.dest)
+        anc_client.connect(host,port)
+        anc_client.send()
+    else:
+        #Route to Anchorage, Anchorage is connected to all airports
+        host,port = host,port = airports.get_address('ANC')
+        anc_client.connect(host,port)
+        anc_client.send()
+    

@@ -9,11 +9,10 @@ DISCONNECT_MSG = "!DISCONNECT"
 
 class Server():
 
-    def __init__(self,sock=None,tier = int,name  = str):
+    def __init__(self,sock=None,name  = str):
         if sock is None:
             self.sock = socket.socket(socket.AF_INET,socket.SOCK_STREAM)
             self.server_address = ('',0000)
-            self.tier = tier
             self.name  = name
             self.thread_list = []
             self.host = ''
@@ -93,6 +92,7 @@ class Server():
 
                         except Exception as e:
                             print(f"Error sending message: {e}")
+                        
         conn.close()
 
     def run(self):

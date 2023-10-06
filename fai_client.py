@@ -1,16 +1,32 @@
 from libs.client import Client
 from libs.airport_codes import AirportCodes
 
-fai_client = Client(tier = 4, name = 'FAI')
+fai_client = Client(name = 'FAI')
+
 airports = AirportCodes()
 
+#declare airports we can directly connect to
+allowed_airports = ['ANC','BRW','SEA']
+fai_client.init_allowed_airports(allowed_airports)
 
-#we need an initial connection thing
- #since it is tier 4, we are only connecting to Anchorage
-fai_client.update_info("SEA","Moro Bamber")
 
-host,port = airports.get_address('SEA') #connecting to where we have dest set to
 
-fai_client.connect(host,port)
-fai_client.run()
-
+while True:
+    fai_client.input_message()
+    if fai_client.cont == '.':
+        break
+    if fai_client.dest in allowed_airports:
+        #if we have a direct connection to desired airport, connect and send message
+        host,port = host,port = airports.get_address(fai_client.dest)
+        fai_client.connect(host,port)
+        fai_client.send()
+    elif fai_client.dest == 'PDX':
+        host,port = host,port = airports.get_address('SEA')
+        fai_client.connect(host,port)
+        fai_client.send()
+    else:
+        #Route to Anchorage, Anchorage is connected to all airports
+        host,port = host,port = airports.get_address('ANC')
+        fai_client.connect(host,port)
+        fai_client.send()
+    

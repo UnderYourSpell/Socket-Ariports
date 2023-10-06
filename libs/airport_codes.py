@@ -7,7 +7,9 @@ class AirportCodes():
                       'FAI' : ['localhost',8081],
                       'SEA': ['localhost',8082],
                       'BRW': ['localhost',8083],
-                      'OTZ': ['localhost',8084]}
+                      'OTZ': ['localhost',8084],
+                      'PDX': ['localhost',8085]
+                      }
     
     def get_address(self,code):
         try:

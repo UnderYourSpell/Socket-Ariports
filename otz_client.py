@@ -1,15 +1,28 @@
 from libs.client import Client
 from libs.airport_codes import AirportCodes
 
-otz_client = Client(tier = 4, name = 'OTZ')
+otz_client = Client(name = 'OTZ')
 
 airports = AirportCodes()
-host,port = airports.get_address('ANC') #connecting to Anchorage
+
+ #connecting to Anchorage
 #will only ever be connected to Ancorage
+allowed_airports = ['ANC']
+otz_client.init_allowed_airports(allowed_airports)
+ #since it is tier 4, we are only connecting to Anchorage
 
-otz_client.connect(host,port) #since it is tier 4, we are only connecting to Anchorage
 
-otz_client.update_info("SEA","Olav Sanderberg") #destination and payload
-
-otz_client.run()
-
+while True:
+    otz_client.input_message()
+    if otz_client.cont == '.':
+        break
+    if otz_client.dest in allowed_airports:
+        host,port = host,port = airports.get_address(otz_client.dest)
+        otz_client.connect(host,port)
+        otz_client.send()
+    else:
+        #default to anchorage, because we know it has connections to all airports
+        host,port = host,port = airports.get_address('ANC')
+        otz_client.connect(host,port)
+        otz_client.send()
+    
