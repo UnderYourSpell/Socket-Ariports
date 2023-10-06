@@ -7,6 +7,7 @@ SIZE = 1024
 FORMAT = "utf-8"
 DISCONNECT_MSG = "!DISCONNECT"
 
+
 class Server():
 
     def __init__(self,sock=None,name  = str):
@@ -22,6 +23,7 @@ class Server():
             self.airport_codes = AirportCodes()
             self.type = "s"
             self.accepted_airports = []
+            self.run_server = 1
 
     def declare_accepted_aiports(self,airports):
         for code in airports:
@@ -56,7 +58,10 @@ class Server():
         name  = info[1]
         dest = info[2]
         payload = info[3]
-        
+
+        if payload == '!END_SERVER':
+                self.run_server = 0
+
         print(f"{name} CONNECTED")
         print(f"Destination: {dest}")
         
@@ -101,7 +106,7 @@ class Server():
         print(f"Listenting on {self.host}:{self.port}")
 
 
-        while True:
+        while self.run_server == 1:
             conn, addr = self.sock.accept()
             new_thread = threading.Thread(target = self.handle_client, args = (conn,addr))
             #should also pass the list of threads so the handle client can 
@@ -110,3 +115,5 @@ class Server():
             new_thread.start()
             #add thread client to list
             print(f'[ACTIVE CONNECTIONS] {threading.activeCount() - 1}')
+        
+        self.sock.close()

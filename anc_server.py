@@ -1,5 +1,6 @@
 from libs.server import Server
 from libs.airport_codes import AirportCodes
+import sys
 
 #Declare a new server
 anc = Server(name  = 'ANC')
@@ -16,5 +17,6 @@ anc.declare_accepted_aiports(client_airports)
 #run the server.  It will handle arriving passengers
 #as well as facilitating connections
 anc.run()
+
 
 
