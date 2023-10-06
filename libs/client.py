@@ -3,7 +3,6 @@ import threading
 
 SIZE = 1024
 FORMAT = "utf-8"
-DISCONNECT_MSG = "!DISCONNECT"
 
 
 class Client:
@@ -52,7 +51,7 @@ class Client:
             payload = self.payload
             #delimiter = '\n'
             message = self.type + '\n' + self.name + '\n' + dest + '\n' + payload + '\n'
-
+            print(f"SENDING {payload} TO {dest}")
             self.sock.send(message.encode(FORMAT))
             #self.sock.send(self.payload.encode(FORMAT))
 

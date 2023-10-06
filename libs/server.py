@@ -39,19 +39,6 @@ class Server():
         delimiter = '\n'
         print(f"[NETWORK CONNECTION] {addr} connected.")
 
-        #connected  = True
-
-        '''
-        If server receives a specific type of information, we handle it a certain way
-        So if we are just receiving a payload
-        This should carry it's source, and string payload, but should have a delimiter or something to
-        say hey, lets just store this information and close the connection because its 
-        coming from another server, not a client
-
-        same goes for information coming from a client
-        much of the code that does that is already written
-        '''
-        
         data = conn.recv(SIZE).decode()
         info = data.split(delimiter)
         from_type = info[0]
@@ -60,15 +47,17 @@ class Server():
         payload = info[3]
 
         if payload == '!END_SERVER':
+                print("[SERVER STOP REQUEST RECEIVED]")
+                print("[STOPPING SERVER]")
                 self.run_server = 0
 
         print(f"{name} CONNECTED")
-        print(f"Destination: {dest}")
+        print(f"DESTINATION: {dest}")
         
         #handle from a server
         if from_type == "s":
             self.received_payloads.append([name,payload])
-            print(f"[PAYLOAD RECEIVED FROM {name}] : {payload}")
+            print(f"{payload} HAS ARRIVED IN: {dest} FROM: {name}")
             print(self.received_payloads)
         else:
 
@@ -86,7 +75,7 @@ class Server():
                         target_host, target_port = self.airport_codes.get_address(dest)
                         target_server = target_host,target_port
                         try:
-                            print("[CONNECTING TO DESTINATION]")
+                            print(f"CONNECTING PASSENGER {payload} TO {dest}")
                             temp = socket.socket(socket.AF_INET,socket.SOCK_STREAM) #open a tempoerary socket to send the payload to the target client
                             temp.connect(target_server)
 
@@ -114,6 +103,5 @@ class Server():
             self.thread_list.append(new_thread)
             new_thread.start()
             #add thread client to list
-            print(f'[ACTIVE CONNECTIONS] {threading.activeCount() - 1}')
         
         self.sock.close()

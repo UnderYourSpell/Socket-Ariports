@@ -1,0 +1,20 @@
+Flights to Simulate:
+
+OTZ->ANC Moro Bamber
+SEA->PDX Ella Bromee
+BRW->SEA Olav Sanderberg
+FAI->OTZ Adam Verrier
+ANC->PDX Jan Ronner
+SEA->BRW Carmen Nilessen
+ANC->FAI Will Cashmore
+FAI->BRW Caeden Carruthers
+ANC->SEA Matt Seline
+PDX->ANC Hunter Eid
+SEA->BRW Olivia Carrier
+BRW->SEA Moro Bamber
+OTZ->FAI Peter Hinds
+BRW->ANC Ari Endestad
+SEA->ANC Bill Bamber
+FAI->PDX Leigh Merlo
+BRW->OTZ Anna Bamber
+OTZ->FAI John Jones

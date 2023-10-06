@@ -22,7 +22,7 @@ while True:
         anc_client.send()
     else:
         #Route to Anchorage, Anchorage is connected to all airports
-        host,port = host,port = airports.get_address('ANC')
+        host,port = host,port = airports.get_address('SEA')
         anc_client.connect(host,port)
         anc_client.send()
     
