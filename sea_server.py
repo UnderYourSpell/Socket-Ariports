@@ -1,6 +1,6 @@
 from libs.server import Server
 from libs.airport_codes import AirportCodes
-
+import sys
 #Declare a new server
 sea = Server(name  = 'SEA')
 
@@ -13,6 +13,16 @@ sea.bind(host,port)
 client_airports = ['SEA','ANC','FAI','PDX']
 sea.declare_accepted_aiports(client_airports)
 
-#run the server.  It will handle arriving passengers
-#as well as facilitating connections
-sea.run()
+output_file_name = "xxx_server_output.txt"
+
+with open(output_file_name, "w") as output_file:
+    sys.stdout = output_file
+
+    #run the server.  It will handle arriving passengers
+    #as well as facilitating connections
+    sea.run()
+    #code here
+
+output_file.close()
+
+

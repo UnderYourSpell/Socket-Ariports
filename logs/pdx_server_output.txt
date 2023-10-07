@@ -1,0 +1,24 @@
+Starting server
+Listenting on localhost:8085
+[NETWORK CONNECTION] ('127.0.0.1', 56879) connected.
+SEA CONNECTED
+DESTINATION: PDX
+Ella Bromee HAS ARRIVED IN PDX FROM SEA
+[['SEA', 'Ella Bromee']]
+[NETWORK CONNECTION] ('127.0.0.1', 56887) connected.
+ANC CONNECTED
+DESTINATION: PDX
+Jan Ronner HAS ARRIVED IN PDX FROM ANC
+[['SEA', 'Ella Bromee'], ['ANC', 'Jan Ronner']]
+[NETWORK CONNECTION] ('127.0.0.1', 56909) connected.
+FAI CONNECTED
+DESTINATION: PDX
+Leigh Merlo HAS ARRIVED IN PDX FROM FAI
+[['SEA', 'Ella Bromee'], ['ANC', 'Jan Ronner'], ['FAI', 'Leigh Merlo']]
+[NETWORK CONNECTION] ('127.0.0.1', 56925) connected.
+[SERVER STOP REQUEST RECEIVED]
+[STOPPING SERVER]
+DUMMY CONNECTED
+DESTINATION: PDX
+!END_SERVER HAS ARRIVED IN PDX FROM DUMMY
+[['SEA', 'Ella Bromee'], ['ANC', 'Jan Ronner'], ['FAI', 'Leigh Merlo']]

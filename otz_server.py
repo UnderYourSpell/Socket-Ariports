@@ -1,6 +1,6 @@
 from libs.server import Server
 from libs.airport_codes import AirportCodes
-
+import sys
 #Declare a new server
 otz = Server(name  = 'OTZ')
 
@@ -12,7 +12,16 @@ otz.bind(host,port)
 #tell server what airports we can connect to
 client_airports = ['OTZ','ANC']
 otz.declare_accepted_aiports(client_airports)
+output_file_name = "otz_server_output.txt"
 
-#run the server.  It will handle arriving passengers
-#as well as facilitating connections
-otz.run()
+with open(output_file_name, "w") as output_file:
+    sys.stdout = output_file
+
+
+    #run the server.  It will handle arriving passengers
+    #as well as facilitating connections
+    otz.run()
+    #code here
+
+output_file.close()
+

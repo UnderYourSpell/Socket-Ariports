@@ -1,6 +1,6 @@
 from libs.server import Server
 from libs.airport_codes import AirportCodes
-
+import sys
 #Declare a new server
 brw = Server(name  = 'BRW')
 
@@ -13,6 +13,16 @@ brw.bind(host,port)
 client_airports = ['BRW','ANC','FAI']
 brw.declare_accepted_aiports(client_airports)
 
-#run the server.  It will handle arriving passengers
-#as well as facilitating connections
-brw.run()
+output_file_name = "brw_server_output.txt"
+
+with open(output_file_name, "w") as output_file:
+    sys.stdout = output_file
+
+    #run the server.  It will handle arriving passengers
+    #as well as facilitating connections
+    brw.run()
+
+    #code here
+
+output_file.close()
+

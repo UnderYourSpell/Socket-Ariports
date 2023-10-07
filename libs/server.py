@@ -51,8 +51,10 @@ class Server():
         dest = info[2]
         payload = info[3]
 
+        
+
         #Allows me to stop the server from running so I can save the Log file
-        if payload == '!END_SERVER':
+        if payload == '!END_SERVER' and name == 'DUMMY':
                 print("[SERVER STOP REQUEST RECEIVED]")
                 print("[STOPPING SERVER]")
                 self.run_server = 0
@@ -68,9 +70,9 @@ class Server():
 
         This server also recognizes itself as a client so it can forward a message to itself
         ''' 
-        if from_type == "s":
+        if from_type == "s" or dest == self.name:
             self.received_payloads.append([name,payload])
-            print(f"{payload} HAS ARRIVED IN: {dest} FROM: {name}")
+            print(f"{payload} HAS ARRIVED IN {dest} FROM {name}")
             print(self.received_payloads)
         else:
 
