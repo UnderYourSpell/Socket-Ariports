@@ -12,16 +12,13 @@ pdx.bind(host,port)
 #tell server what airports we can connect to
 client_airports = ['PDX','SEA']
 pdx.declare_accepted_aiports(client_airports)
-output_file_name = "pdx_server_output.txt"
 
-with open(output_file_name, "w") as output_file:
-    sys.stdout = output_file
 
-    #run the server.  It will handle arriving passengers
-    #as well as facilitating connections
-    pdx.run()
+#run the server.  It will handle arriving passengers
+#as well as facilitating connections
+pdx.run()
 
-    #code here
+#code here
 
-output_file.close()
+
 

@@ -71,9 +71,11 @@ class Server():
         This server also recognizes itself as a client so it can forward a message to itself
         ''' 
         if from_type == "s" or dest == self.name:
-            self.received_payloads.append([name,payload])
-            print(f"{payload} HAS ARRIVED IN {dest} FROM {name}")
-            print(self.received_payloads)
+            if name != 'DUMMY':
+                self.received_payloads.append([name,payload])
+                print(f"{payload} HAS ARRIVED IN {dest} FROM {name}")
+                print(self.received_payloads)
+            
         else:
 
         #dest = conn.recv(SIZE).decode(FORMAT)

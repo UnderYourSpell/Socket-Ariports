@@ -14,14 +14,13 @@ client_airports = ['OTZ','ANC']
 otz.declare_accepted_aiports(client_airports)
 output_file_name = "otz_server_output.txt"
 
-with open(output_file_name, "w") as output_file:
-    sys.stdout = output_file
 
 
-    #run the server.  It will handle arriving passengers
-    #as well as facilitating connections
-    otz.run()
-    #code here
 
-output_file.close()
+#run the server.  It will handle arriving passengers
+#as well as facilitating connections
+otz.run()
+#code here
+
+
 

@@ -6,7 +6,7 @@ fai_client = Client(name = 'FAI')
 airports = AirportCodes()
 
 #declare airports we can directly connect to
-allowed_airports = ['ANC','BRW','SEA']
+allowed_airports = ['ANC','SEA']
 fai_client.init_allowed_airports(allowed_airports)
 
 
