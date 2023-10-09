@@ -1,0 +1,24 @@
+Starting server
+Listenting on localhost:8083
+[NETWORK CONNECTION] ('127.0.0.1', 56890) connected.
+SEA CONNECTED
+DESTINATION: BRW
+Carmen Nielssen HAS ARRIVED IN BRW FROM SEA
+[['SEA', 'Carmen Nielssen']]
+[NETWORK CONNECTION] ('127.0.0.1', 56893) connected.
+FAI CONNECTED
+DESTINATION: BRW
+Caeden Carruthers HAS ARRIVED IN BRW FROM FAI
+[['SEA', 'Carmen Nielssen'], ['FAI', 'Caeden Carruthers']]
+[NETWORK CONNECTION] ('127.0.0.1', 56899) connected.
+SEA CONNECTED
+DESTINATION: BRW
+Olivia Carrier HAS ARRIVED IN BRW FROM SEA
+[['SEA', 'Carmen Nielssen'], ['FAI', 'Caeden Carruthers'], ['SEA', 'Olivia Carrier']]
+[NETWORK CONNECTION] ('127.0.0.1', 56959) connected.
+[SERVER STOP REQUEST RECEIVED]
+[STOPPING SERVER]
+DUMMY CONNECTED
+DESTINATION: BRW
+!END_SERVER HAS ARRIVED IN BRW FROM DUMMY
+[['SEA', 'Carmen Nielssen'], ['FAI', 'Caeden Carruthers'], ['SEA', 'Olivia Carrier']]

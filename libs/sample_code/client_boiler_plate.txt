@@ -1,0 +1,28 @@
+from libs.client import Client
+from libs.airport_codes import AirportCodes
+
+xxx_client = Client(name = 'X')
+
+airports = AirportCodes()
+
+#declare airports we can directly connect to
+allowed_airports = []
+x_client.init_allowed_airports(allowed_airports)
+
+
+
+while True:
+    x_client.input_message()
+    if x_client.cont == '.':
+        break
+    if x_client.dest in allowed_airports:
+        #if we have a direct connection to desired airport, connect and send message
+        host,port = host,port = airports.get_address(x_client.dest)
+        x_client.connect(host,port)
+        x_client.send()
+    else:
+        #Route to Anchorage, Anchorage is connected to all airports
+        host,port = host,port = airports.get_address('ANC')
+        x_client.connect(host,port)
+        x_client.send()
+    

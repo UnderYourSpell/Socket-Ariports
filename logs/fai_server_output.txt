@@ -1,0 +1,24 @@
+Starting server
+Listenting on localhost:8081
+[NETWORK CONNECTION] ('127.0.0.1', 56892) connected.
+ANC CONNECTED
+DESTINATION: FAI
+Will Cashmore HAS ARRIVED IN FAI FROM ANC
+[['ANC', 'Will Cashmore']]
+[NETWORK CONNECTION] ('127.0.0.1', 56905) connected.
+OTZ CONNECTED
+DESTINATION: FAI
+Peter Hinds HAS ARRIVED IN FAI FROM OTZ
+[['ANC', 'Will Cashmore'], ['OTZ', 'Peter Hinds']]
+[NETWORK CONNECTION] ('127.0.0.1', 56914) connected.
+OTZ CONNECTED
+DESTINATION: FAI
+John Jones HAS ARRIVED IN FAI FROM OTZ
+[['ANC', 'Will Cashmore'], ['OTZ', 'Peter Hinds'], ['OTZ', 'John Jones']]
+[NETWORK CONNECTION] ('127.0.0.1', 56915) connected.
+[SERVER STOP REQUEST RECEIVED]
+[STOPPING SERVER]
+DUMMY CONNECTED
+DESTINATION: FAI
+!END_SERVER HAS ARRIVED IN FAI FROM DUMMY
+[['ANC', 'Will Cashmore'], ['OTZ', 'Peter Hinds'], ['OTZ', 'John Jones']]

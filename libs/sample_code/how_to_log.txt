@@ -1,0 +1,9 @@
+output_file_name = "xxx_server_output.txt"
+
+with open(output_file_name, "w") as output_file:
+    sys.stdout = output_file
+
+
+    #code here
+
+output_file.close()
