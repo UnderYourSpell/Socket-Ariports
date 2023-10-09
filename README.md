@@ -40,13 +40,6 @@ In testing I wiuld use only 2 or 3 airports to test my code.  And once I got tha
 
 iii) I uploaded a video to YouTube of me running the programs: https://www.youtube.com/watch?v=km9C_vZvr0A
 
-
-In your report “README,” compare and contrast how such a simulation compares with
-the Internet traffic. Do you see parallels with systems such as Internet eXchange Points
-and Domain Name Servers and how we simulated the traffic with a hub-and-spoke
-topology here? Please state your assumptions and your thoughts inspired by this
-exercise in the context of Computer Networks.
-
 Thoughts/Reflections/Assumptions
 
 I think this simulation reflects how internet traffic works in how the larger hubs like ANC and SEA have much more traffic flowing into them, and through them than smaller 'airports'.
