@@ -22,6 +22,8 @@ Written in VSCode on Windows 11
 4. Type destination as uppercase 3 character airport code (example: ANC,SEA,OTZ etc.)
 5. Type a name or whatever message you want to send
 6. Now you can see in your destination server the message that was sent
+7. It is possible to end the server processes by running the Dummy Client and sending !END_SERVER twice to the target server you want to close
+8. to close the clients, type . then hit enter twice
 More information in YouTube video linked in  iii)
 
 i) I did a test run using the passenger list in the logs folder.  The server logs appear in the logs folder as well.
